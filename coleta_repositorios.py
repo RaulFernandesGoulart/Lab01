@@ -1,12 +1,12 @@
 import requests
 import pandas as pd
 
-# Seu token GitHub
+# token GitHub
 TOKEN = 'Colocar o token aqui'
 HEADERS = {'Authorization': f'bearer {TOKEN}'}
 URL = 'https://api.github.com/graphql'
 
-# Query GraphQL
+# GraphQL
 query = """
 {
   search(query: "stars:>1", type: REPOSITORY, first: 100) {
@@ -39,12 +39,12 @@ query = """
 }
 """
 
-# Fazer a requisição
+
 response = requests.post(URL, json={'query': query}, headers=HEADERS)
 if response.status_code == 200:
     data = response.json()['data']['search']['nodes']
 
-    # Processar e salvar dados em CSV
+   
     df = pd.DataFrame([{
         'name': repo['name'],
         'owner': repo['owner']['login'],
